@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import java.util.stream.Stream;
 
 @RestController
 @RequiredArgsConstructor
@@ -12,7 +12,7 @@ public class PostController {
     private final PostRepository postRepository;
 
     @GetMapping
-    public List<Post> getAll() {
-        return postRepository.findAll();
+    public Stream<PostDto> getAll() {
+        return postRepository.findAll().stream().map(PostDto::from);
     }
 }
